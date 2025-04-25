@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import SearchBar from "../SearchBar/SearchBar";
 import ImageGallery from "../ImageGallery/ImageGallery";
 import Loader from "../Loader/Loader";
@@ -64,13 +64,8 @@ const App = () => {
         );
         setTotalPages(response.data.total_pages);
       } catch (error: unknown) {
-        if (error instanceof AxiosError) {
-          console.error(
-            "Axios error while fetching images:",
-            error.response?.data || error.message
-          );
-        } else if (error instanceof Error) {
-          console.error("General error:", error.message);
+        if (error instanceof Error) {
+          console.error("Error fetching images:", error.message);
         } else {
           console.error("Unknown error:", error);
         }
@@ -85,9 +80,7 @@ const App = () => {
   );
 
   useEffect(() => {
-    if (query) {
-      fetchImages(query, page);
-    }
+    fetchImages(query, page);
   }, [query, page, fetchImages]);
 
   const handleSearch = (newQuery: string) => {
