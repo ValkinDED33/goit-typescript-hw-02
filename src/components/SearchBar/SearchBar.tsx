@@ -1,23 +1,27 @@
-import { useState } from "react";
+import { useState, ChangeEvent, KeyboardEvent, FC } from "react";
 import { toast } from "react-hot-toast";
 import { FaSearch } from "react-icons/fa";
 import styles from "./SearchBar.module.css";
 
-const SearchBar = ({ onSubmit }) => {
-  const [query, setQuery] = useState("");
+interface SearchBarProps {
+  onSubmit: (query: string) => void;
+}
 
-  const handleChange = (e) => {
+const SearchBar: FC<SearchBarProps> = ({ onSubmit }) => {
+  const [query, setQuery] = useState<string>("");
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
   };
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      e.preventDefault(); // Останавливаем стандартное поведение формы
+      e.preventDefault();
       if (query.trim() === "") {
-        toast.error("Please enter a search query."); // Ошибка при пустом запросе
+        toast.error("Please enter a search query.");
       } else {
         onSubmit(query);
-        setQuery(""); // Очищаем поле ввода
+        setQuery("");
       }
     }
   };
@@ -33,7 +37,7 @@ const SearchBar = ({ onSubmit }) => {
           placeholder="Search images and photos"
           value={query}
           onChange={handleChange}
-          onKeyDown={handleKeyDown} // Теперь ошибка срабатывает точно
+          onKeyDown={handleKeyDown}
           className={styles.input}
         />
       </form>

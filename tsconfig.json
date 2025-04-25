@@ -18,6 +18,6 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "incremental": true,
-    "tsBuildInfoFile": "./.tsbuildinfo"
+    "tsBuildInfoFile": "./node_modules/.tsbuildinfo"
   }
 }

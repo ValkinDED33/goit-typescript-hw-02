@@ -13,7 +13,7 @@
 
     /* Incremental builds */
     "incremental": true,
-    "tsBuildInfoFile": "./node_modules/.tsbuildinfo",
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
 
     /* Strict type-checking */
     "strict": true,

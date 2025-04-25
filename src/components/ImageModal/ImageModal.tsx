@@ -1,9 +1,29 @@
+import { FC } from "react";
 import Modal from "react-modal";
 import styles from "./ImageModal.module.css";
 
 Modal.setAppElement("#root");
 
-const ImageModal = ({ isOpen, image, onRequestClose }) => {
+interface UnsplashImage {
+  id: string;
+  alt_description: string;
+  urls: {
+    small: string;
+    regular: string;
+  };
+  user: {
+    name: string;
+  };
+  likes: number;
+}
+
+interface ImageModalProps {
+  isOpen: boolean;
+  image: UnsplashImage | null;
+  onRequestClose: () => void;
+}
+
+const ImageModal: FC<ImageModalProps> = ({ isOpen, image, onRequestClose }) => {
   if (!image) return null;
 
   return (
